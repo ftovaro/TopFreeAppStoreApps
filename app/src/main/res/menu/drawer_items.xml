@@ -1,45 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
     <item android:title="@string/categories">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/top20Apps"
-                    android:checked="false"
-                    android:title="@string/top20apps" />
-                <item
-                    android:id="@+id/education"
-                    android:checked="false"
-                    android:title="@string/education" />
-                <item
-                    android:id="@+id/entertainment"
-                    android:checked="false"
-                    android:title="@string/entertainment" />
-                <item
-                    android:id="@+id/games"
-                    android:checked="false"
-                    android:title="@string/games" />
-                <item
-                    android:id="@+id/music"
-                    android:checked="false"
-                    android:title="@string/music" />
-                <item
-                    android:id="@+id/navigation"
-                    android:checked="false"
-                    android:title="@string/navigation" />
-                <item
-                    android:id="@+id/photo_and_video"
-                    android:checked="false"
-                    android:title="@string/photo_and_video" />
-                <item
-                    android:id="@+id/social_networking"
-                    android:checked="false"
-                    android:title="@string/social_networking" />
-                <item
-                    android:id="@+id/travel"
-                    android:checked="false"
-                    android:title="@string/travel" />
-            </group>
-        </menu>
     </item>
+
+    <menu>
+    </menu>
+    -->
+        <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/top20Apps"
+                android:checked="false"
+                android:title="@string/top20apps" />
+            <item
+                android:id="@+id/education"
+                android:checked="false"
+                android:title="@string/education" />
+            <item
+                android:id="@+id/entertainment"
+                android:checked="false"
+                android:title="@string/entertainment" />
+            <item
+                android:id="@+id/games"
+                android:checked="false"
+                android:title="@string/games" />
+            <item
+                android:id="@+id/music"
+                android:checked="false"
+                android:title="@string/music" />
+            <item
+                android:id="@+id/navigation"
+                android:checked="false"
+                android:title="@string/navigation" />
+            <item
+                android:id="@+id/photo_and_video"
+                android:checked="false"
+                android:title="@string/photo_and_video" />
+            <item
+                android:id="@+id/social_networking"
+                android:checked="false"
+                android:title="@string/social_networking" />
+            <item
+                android:id="@+id/travel"
+                android:checked="false"
+                android:title="@string/travel" />
+        </group>
 </menu>

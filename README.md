@@ -16,16 +16,16 @@ This is the only way I've found to avoid this exception.
 ### How to use it
 
 This application shows the 20 most popular free apps on AppStore.
-First you can see 20 top apps.
+First, you can see all 20 top apps.
 <img src="screenshots/screenshot_1.png" width="400">
 
 You can use the NavigationView to select from different categories.
 <img src="screenshots/screenshot_2.png" width="400">
 
-If you want to get new information use the update button.
+You can select an app to see more information about It.
 <img src="screenshots/screenshot_3.png" width="400">
 
-You can select an app to see more information about It.
+If you want to get new information use the update button.
 <img src="screenshots/screenshot_4.png" width="400">
 
 
@@ -34,7 +34,7 @@ You can select an app to see more information about It.
 This app supports different screen sizes.
 
 <img src="screenshots/screenshot_5.png" width="400">
-<img src="screenshots/screenshot_6.png" width="400">
+<img src="screenshots/screenshot_6.png" width="800">
 
 Also, you don't have to worry about wasting your data because this app saves the information and you can check It even without an Internet connection.
 
