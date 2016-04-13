@@ -1,9 +1,13 @@
 package com.ftovaro.topappstoreapps.activities;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.transition.Explode;
+import android.transition.Fade;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -15,7 +19,7 @@ public class DetailedAppActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_app);
+        setContentView(R.layout.activity_detailed_app);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -36,9 +40,19 @@ public class DetailedAppActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                if (android.os.Build.VERSION.SDK_INT >= 21) {
+                    finishWithTransition();
+                }else{
+                    finish();
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void finishWithTransition(){
+        getWindow().setExitTransition(new Fade());
+        this.finishAfterTransition();
     }
 }
