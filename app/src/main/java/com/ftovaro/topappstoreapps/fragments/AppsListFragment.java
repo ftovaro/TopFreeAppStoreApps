@@ -80,7 +80,6 @@ public class AppsListFragment extends Fragment {
 
         recyclerView.setAdapter(applicationListAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        //recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
                 recyclerView, new ClickListener() {
