@@ -2,14 +2,37 @@ package com.ftovaro.topappstoreapps.utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 
 import com.ftovaro.topappstoreapps.R;
 
 /**
+ * Class to manage the different ways to show information to the user.
  * Created by FelipeTovar on 10-Apr-16.
  */
 public class InfoShower {
+
     private static ProgressDialog progressDialog;
+
+    /**
+     * Shows a Snackbar.
+     * @param coordinatorLayout where the snack will be shown.
+     * @param message           what the Snackbar will say.
+     * @param duration          how long is going to be visible.
+     */
+    public static void showSnack(CoordinatorLayout coordinatorLayout, String message, int duration) {
+        Snackbar.make(coordinatorLayout, message, duration).show();
+    }
+
+    /**
+     * Shows a Snackbar.
+     * @param coordinatorLayout where the snack will be shown.
+     * @param message           what the Snackbar will say.
+     */
+    public static void showSnack(CoordinatorLayout coordinatorLayout, String message) {
+        showSnack(coordinatorLayout, message, Snackbar.LENGTH_LONG);
+    }
 
     /**
      * Display a progress dialog.

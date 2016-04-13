@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 
 /**
+ * Manage a RecyclerView as a Grid that auto fits in the screen.
  * Created by FelipeTovar on 12-Apr-16.
  * Taken from : https://codentrick.com/part-4-android-recyclerview-grid/
  */

@@ -6,6 +6,7 @@ import android.support.v4.util.LruCache;
 import com.android.volley.toolbox.ImageLoader.ImageCache;
 
 /**
+ * Manage all the process of saving the image in caché.
  * Created by FelipeTovar on 10-Apr-16.
  */
 public class LruBitmapCache extends LruCache<String, Bitmap> implements ImageCache {

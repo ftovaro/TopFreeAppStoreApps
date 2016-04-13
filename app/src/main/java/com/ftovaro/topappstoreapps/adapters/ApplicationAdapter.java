@@ -15,18 +15,19 @@ import com.ftovaro.topappstoreapps.utils.AppController;
 import java.util.List;
 
 /**
+ * An adapter for the RecyclerView.
  * Created by FelipeTovar on 10-Apr-16.
  */
-public class ApplicationListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ApplicationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     /** List of apps **/
     private List<Application> applicationList;
     /** Loader for images that uses LRU Caché **/
     private ImageLoader imageLoader;
-
+    /** Determine size of screen **/
     private boolean isScreenLarge;
 
-    public ApplicationListAdapter(List<Application> applicationList, boolean isScreenLarge) {
+    public ApplicationAdapter(List<Application> applicationList, boolean isScreenLarge) {
         this.applicationList = applicationList;
         this.isScreenLarge = isScreenLarge;
         imageLoader = AppController.getInstance().getImageLoader();

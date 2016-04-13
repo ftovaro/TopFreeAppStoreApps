@@ -1,12 +1,10 @@
 package com.ftovaro.topappstoreapps.activities;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.transition.Explode;
 import android.transition.Fade;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -50,6 +48,9 @@ public class DetailedAppActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Set an exit animation for the activity.
+     */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void finishWithTransition(){
         getWindow().setExitTransition(new Fade());

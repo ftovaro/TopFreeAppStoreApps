@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.orm.SugarRecord;
 
 /**
+ * Model of an Application.
  * Created by FelipeTovar on 10-Apr-16.
  */
 public class Application extends SugarRecord implements Parcelable {

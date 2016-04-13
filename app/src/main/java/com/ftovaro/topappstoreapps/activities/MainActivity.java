@@ -3,6 +3,7 @@ package com.ftovaro.topappstoreapps.activities;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -17,19 +18,25 @@ import android.view.MenuItem;
 
 import com.ftovaro.topappstoreapps.R;
 import com.ftovaro.topappstoreapps.fragments.AppsListFragment;
+import com.ftovaro.topappstoreapps.interfaces.CommunicatorListener;
 import com.ftovaro.topappstoreapps.utils.CategoriesOptions;
+import com.ftovaro.topappstoreapps.utils.InfoShower;
 
-public class MainActivity extends AppCompatActivity implements
+/**
+ * Main activity of the application.
+ */
+public class MainActivity extends AppCompatActivity implements CommunicatorListener,
         NavigationView.OnNavigationItemSelectedListener {
 
-    private NavigationView navigationView;
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle drawerToggle;
-    private Toolbar toolbar;
+    private NavigationView mNavigationView;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private Toolbar mToolbar;
     private MenuItem mItemSelected;
-    private AppsListFragment fragment;
+    private AppsListFragment mFragment;
     private boolean isRefreshing;
     private boolean isScreenLarge;
+    private CoordinatorLayout mCoordinatorLayout;
 
 
     @Override
@@ -41,22 +48,23 @@ public class MainActivity extends AppCompatActivity implements
         setupToolbar();
         setupDrawer();
         setupFragment();
+        setupCoordinator();
     }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        drawerToggle.syncState();
+        mDrawerToggle.syncState();
         isRefreshing = false;
-        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.top20Apps));
-        MenuItem item = navigationView.getMenu().findItem(R.id.top20Apps);
+        onNavigationItemSelected(mNavigationView.getMenu().findItem(R.id.top20Apps));
+        MenuItem item = mNavigationView.getMenu().findItem(R.id.top20Apps);
         item.setChecked(true);
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if (drawerToggle != null) drawerToggle.onConfigurationChanged(newConfig);
+        if (mDrawerToggle != null) mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -70,8 +78,8 @@ public class MainActivity extends AppCompatActivity implements
         switch (item.getItemId()){
             case R.id.action_refresh:
                 isRefreshing = true;
-                onNavigationItemSelected(navigationView.getMenu().findItem(R.id.top20Apps));
-                MenuItem itemNav = navigationView.getMenu().findItem(R.id.top20Apps);
+                onNavigationItemSelected(mNavigationView.getMenu().findItem(R.id.top20Apps));
+                MenuItem itemNav = mNavigationView.getMenu().findItem(R.id.top20Apps);
                 itemNav.setChecked(true);
                 break;
             default:
@@ -82,82 +90,99 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        if (item == null || drawerLayout == null) return false;
+        if (item == null || mDrawerLayout == null) return false;
         if (mItemSelected != null ) mItemSelected.setChecked(false);
         mItemSelected = item;
 
-        drawerLayout.closeDrawer(GravityCompat.START);
+        mDrawerLayout.closeDrawer(GravityCompat.START);
 
         switch (item.getItemId()) {
             case R.id.top20Apps:
-                fragment.updateInfo(CategoriesOptions.TOP20APPS.ordinal(), isRefreshing);
-                toolbar.setTitle(getString(R.string.top20apps));
+                mFragment.updateInfo(CategoriesOptions.TOP20APPS.ordinal(), isRefreshing);
+                mToolbar.setTitle(getString(R.string.top20apps));
                 isRefreshing = false;
                 return true;
             case R.id.education:
-                fragment.updateInfo(CategoriesOptions.EDUCATION.ordinal(), isRefreshing);
-                toolbar.setTitle(getString(R.string.education));
+                mFragment.updateInfo(CategoriesOptions.EDUCATION.ordinal(), isRefreshing);
+                mToolbar.setTitle(getString(R.string.education));
                 return true;
             case R.id.entertainment:
-                fragment.updateInfo(CategoriesOptions.ENTERTAINMENT.ordinal(), isRefreshing);
-                toolbar.setTitle(getString(R.string.entertainment));
+                mFragment.updateInfo(CategoriesOptions.ENTERTAINMENT.ordinal(), isRefreshing);
+                mToolbar.setTitle(getString(R.string.entertainment));
                 return true;
             case R.id.games:
-                fragment.updateInfo(CategoriesOptions.GAMES.ordinal(), isRefreshing);
-                toolbar.setTitle(getString(R.string.games));
+                mFragment.updateInfo(CategoriesOptions.GAMES.ordinal(), isRefreshing);
+                mToolbar.setTitle(getString(R.string.games));
                 return true;
             case R.id.music:
-                fragment.updateInfo(CategoriesOptions.MUSIC.ordinal(), isRefreshing);
-                toolbar.setTitle(getString(R.string.music));
+                mFragment.updateInfo(CategoriesOptions.MUSIC.ordinal(), isRefreshing);
+                mToolbar.setTitle(getString(R.string.music));
                 return true;
             case R.id.navigation:
-                fragment.updateInfo(CategoriesOptions.NAVIGATION.ordinal(), isRefreshing);
-                toolbar.setTitle(getString(R.string.navigation));
+                mFragment.updateInfo(CategoriesOptions.NAVIGATION.ordinal(), isRefreshing);
+                mToolbar.setTitle(getString(R.string.navigation));
                 return true;
             case R.id.photo_and_video:
-                fragment.updateInfo(CategoriesOptions.PHOTO_AND_VIDEO.ordinal(), isRefreshing);
-                toolbar.setTitle(getString(R.string.photo_and_video));
+                mFragment.updateInfo(CategoriesOptions.PHOTO_AND_VIDEO.ordinal(), isRefreshing);
+                mToolbar.setTitle(getString(R.string.photo_and_video));
                 return true;
             case R.id.social_networking:
-                fragment.updateInfo(CategoriesOptions.SOCIAL_NETWORKING.ordinal(), isRefreshing);
-                toolbar.setTitle(getString(R.string.social_networking));
+                mFragment.updateInfo(CategoriesOptions.SOCIAL_NETWORKING.ordinal(), isRefreshing);
+                mToolbar.setTitle(getString(R.string.social_networking));
                 return true;
             case R.id.travel:
-                fragment.updateInfo(CategoriesOptions.TRAVEL.ordinal(), isRefreshing);
-                toolbar.setTitle(getString(R.string.travel));
+                mFragment.updateInfo(CategoriesOptions.TRAVEL.ordinal(), isRefreshing);
+                mToolbar.setTitle(getString(R.string.travel));
                 return true;
         }
         return false;
     }
 
-    private void setupToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    @Override
+    public void showInfo() {
+        InfoShower.showSnack(mCoordinatorLayout, getString(R.string.connect_to_internet));
     }
 
+    /**
+     * Set up a the toolbar of the activity.
+     */
+    private void setupToolbar() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+    }
+
+    /**
+     * Set up the NavigationView of the activity.
+     **/
     private void setupDrawer() {
-        navigationView = (NavigationView) findViewById(R.id.drawer_nav_view);
-        if (navigationView != null) navigationView.setNavigationItemSelectedListener(this);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerToggle = new ActionBarDrawerToggle(this,
-                drawerLayout,
-                toolbar,
+        mNavigationView = (NavigationView) findViewById(R.id.drawer_nav_view);
+        if (mNavigationView != null) mNavigationView.setNavigationItemSelectedListener(this);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(this,
+                mDrawerLayout,
+                mToolbar,
                 R.string.open,
                 R.string.close);
-        drawerLayout.addDrawerListener(drawerToggle);
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
     }
 
+    /**
+     * Set up the fragment with the list of data.
+     */
     private void setupFragment() {
-        fragment = new AppsListFragment();
+        mFragment = new AppsListFragment();
         Bundle bundle = new Bundle();
         bundle.putBoolean("IsScreenLarge", isScreenLarge);
-        fragment.setArguments(bundle);
+        mFragment.setArguments(bundle);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container_body, fragment);
+        fragmentTransaction.replace(R.id.container_body, mFragment);
         fragmentTransaction.commit();
     }
 
+    /**
+     * Set up the screen orientation depending of the screen size.
+     */
     private void setupScreenOrientation(){
         if(isScreenLarge()) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -168,6 +193,17 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * Set up the coordinator layout to make possible to show the Snackbar.
+     */
+    private void setupCoordinator(){
+        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
+    }
+
+    /**
+     * Determine the screen size.
+     * @return true if the screen is large or extra large.
+     */
     private boolean isScreenLarge() {
         final int screenSize = getResources().getConfiguration().screenLayout
                 & Configuration.SCREENLAYOUT_SIZE_MASK;

@@ -10,6 +10,7 @@ import com.android.volley.toolbox.Volley;
 import com.orm.SugarContext;
 
 /**
+ * Manage the request of Volley.
  * Created by FelipeTovar on 10-Apr-16.
  */
 public class AppController extends Application {

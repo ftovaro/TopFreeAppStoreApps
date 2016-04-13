@@ -1,6 +1,7 @@
 package com.ftovaro.topappstoreapps.utils;
 
 /**
+ * Enum that represents the different categories.
  * Created by FelipeTovar on 10-Apr-16.
  */
 public enum CategoriesOptions {

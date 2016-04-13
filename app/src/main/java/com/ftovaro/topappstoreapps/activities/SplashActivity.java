@@ -11,6 +11,9 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /* Because the information we load is so short the splash activity has a minimum time
+            to be seen.
+         */
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
